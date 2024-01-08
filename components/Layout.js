@@ -10,7 +10,7 @@ export default function Layout({ children }) {
 		return (
 			<div className="w-screen h-screen bg-white text-black flex">
 				<Navigation />
-				<div>{children}</div>
+				<div className="flex-auto">{children}</div>
 			</div>
 		);
 	}
