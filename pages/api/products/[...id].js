@@ -40,5 +40,8 @@ export default async function handle(req, res) {
 			care_description: careDescription,
 		});
 		res.json(true);
+	} else if (method === 'DELETE') {
+		const deletedCount = await Product.deleteOne({ _id: id });
+		res.json(deletedCount);
 	}
 }

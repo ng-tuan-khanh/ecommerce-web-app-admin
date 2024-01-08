@@ -1,15 +1,22 @@
 import Layout from '@/components/Layout';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 export default function Products() {
 	const [products, setProducts] = useState([]);
+	const [deletedCount, setDeletedCount] = useState(0);
+	const router = useRouter();
 	useEffect(() => {
 		axios.get('/api/products').then((response) => {
 			setProducts(response.data);
 		});
-	}, []);
+	}, [deletedCount]);
+	async function deleteProduct(_id) {
+		const cnt = await axios.delete('/api/products/' + _id);
+		setDeletedCount(cnt);
+	}
 	return (
 		<Layout>
 			<div className="m-6">
@@ -66,7 +73,12 @@ export default function Products() {
 											</svg>
 											<span>Edit</span>
 										</Link>
-										<Link href="" className="btn-primary">
+										<button
+											onClick={() =>
+												deleteProduct(product._id)
+											}
+											className="btn-primary"
+										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -82,7 +94,7 @@ export default function Products() {
 												/>
 											</svg>
 											<span>Delete</span>
-										</Link>
+										</button>
 									</div>
 								</td>
 							</tr>
