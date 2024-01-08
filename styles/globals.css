@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input {
-	@apply border-2 border-neutral-300 rounded-md p-1;
-}
-
-input:focus {
-	@apply border-black;
-}
-
 @layer base {
 	input[type='number']::-webkit-inner-spin-button,
 	input[type='number']::-webkit-outer-spin-button {
@@ -18,6 +10,28 @@ input:focus {
 	}
 }
 
+@layer base {
+	html {
+		font-family: 'Tenor Sans', system-ui, sans-serif;
+	}
+}
+
+input {
+	@apply border-2 border-neutral-300 rounded-md p-1;
+}
+
+input:focus {
+	@apply border-black;
+}
+
 .btn-primary {
-	@apply bg-black text-white flex gap-1 p-2 rounded-md justify-center;
+	@apply bg-black text-white inline-flex gap-1 px-4 py-2 rounded-md justify-center;
+}
+
+.table-basic thead {
+	@apply font-semibold text-center;
+}
+
+.table-basic tr td {
+	@apply border-2 border-neutral-300 p-1;
 }

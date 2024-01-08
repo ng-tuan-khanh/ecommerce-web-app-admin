@@ -2,9 +2,24 @@ import { mongooseConnect } from '@/lib/mongoose';
 import { Product } from '@/models/Product';
 
 export default async function handle(req, res) {
+	await mongooseConnect();
 	const { method } = req;
-	if (method === 'POST') {
-		await mongooseConnect();
+	if (method === 'GET') {
+		const products = await Product.find();
+		res.json(
+			products.map((product) => {
+				const mappedProduct = {
+					_id: product._id,
+					productName: product.product_name,
+					collectionName: product.collection_name,
+					price: product.price,
+					materials: product.materials,
+					careDescription: product.care_description,
+				};
+				return mappedProduct;
+			})
+		);
+	} else if (method === 'POST') {
 		const {
 			productName,
 			collectionName,
