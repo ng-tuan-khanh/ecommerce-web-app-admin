@@ -13,6 +13,7 @@ export default async function handle(req, res) {
 					productName: product.product_name,
 					collectionName: product.collection_name,
 					price: product.price,
+					images: product.images,
 					materials: product.materials,
 					careDescription: product.care_description,
 				};
@@ -24,6 +25,7 @@ export default async function handle(req, res) {
 			productName,
 			collectionName,
 			price,
+			images,
 			materials,
 			careDescription,
 		} = req.body;
@@ -31,6 +33,7 @@ export default async function handle(req, res) {
 			product_name: productName,
 			collection_name: collectionName,
 			price: price,
+			images: images,
 			materials: materials,
 			care_description: careDescription,
 		});

@@ -11,6 +11,7 @@ export default async function handle(req, res) {
 			product_name: productName,
 			collection_name: collectionName,
 			price,
+			images,
 			materials,
 			care_description: careDescription,
 		} = await Product.findById(id);
@@ -18,6 +19,7 @@ export default async function handle(req, res) {
 			_id,
 			productName,
 			collectionName,
+			images,
 			price,
 			materials,
 			careDescription,
@@ -28,17 +30,21 @@ export default async function handle(req, res) {
 			productName,
 			collectionName,
 			price,
+			images,
 			materials,
 			careDescription,
 		} = req.body;
-		await Product.updateOne({
-			_id,
-			product_name: productName,
-			collection_name: collectionName,
-			price: price,
-			materials: materials,
-			care_description: careDescription,
-		});
+		await Product.updateOne(
+			{ _id },
+			{
+				product_name: productName,
+				collection_name: collectionName,
+				price: price,
+				images: images,
+				materials: materials,
+				care_description: careDescription,
+			}
+		);
 		res.json(true);
 	} else if (method === 'DELETE') {
 		const deletedCount = await Product.deleteOne({ _id: id });

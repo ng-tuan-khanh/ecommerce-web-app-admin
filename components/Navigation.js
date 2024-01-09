@@ -8,7 +8,7 @@ export default function Navigation() {
 	const activeLink = inactiveLink + ' bg-neutral-400/75 font-semibold';
 	const { pathname } = useRouter();
 	return (
-		<div className="flex-initial bg-neutral-400/50 py-6">
+		<div className="h-full flex-initial bg-neutral-400/50 py-6">
 			<nav className="flex flex-col">
 				<Link href="/" className="flex justify-center mb-6">
 					<img src="/open_fashion.svg"></img>

@@ -8,6 +8,7 @@ export default function ProductForm({
 	productName: _productName,
 	collectionName: _collectionName,
 	price: _price,
+	images: _images,
 	materials: _materials,
 	careDescription: _careDescription,
 }) {
@@ -15,6 +16,7 @@ export default function ProductForm({
 	const [productName, setProductName] = useState(_productName || '');
 	const [collectionName, setCollectionName] = useState(_collectionName || '');
 	const [price, setPrice] = useState(_price || 0);
+	const [images, setImages] = useState(_images || []);
 	const [materials, setMaterials] = useState(_materials || '');
 	const [careDescription, setCareDescription] = useState(
 		_careDescription || ''
@@ -25,6 +27,7 @@ export default function ProductForm({
 			productName,
 			collectionName,
 			price,
+			images,
 			materials,
 			careDescription,
 		};
@@ -39,10 +42,14 @@ export default function ProductForm({
 		const files = ev.target?.files;
 		if (files?.length > 0) {
 			let formData = new FormData();
-			for (let i = 0; i < files.length; i++) {
-				formData.append('file', files[i]);
+			for (const file of files) {
+				formData.append('file', file);
 			}
 			const res = await axios.post('/api/upload', formData);
+			setImages((oldImages) => {
+				const newImages = [...oldImages, ...res.data.links];
+				return newImages;
+			});
 		}
 	}
 	return (
@@ -73,29 +80,37 @@ export default function ProductForm({
 			</label>
 			<div className="flex flex-col gap-1">
 				Images
-				<label className="flex-none w-32 h-40 flex flex-col justify-center items-center bg-neutral-300 rounded-md cursor-pointer">
-					Upload
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						strokeWidth={1.5}
-						stroke="currentColor"
-						className="w-6 h-6"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-						/>
-					</svg>
-					<input
-						type="file"
-						className="hidden"
-						onChange={uploadImages}
-						multiple
-					></input>
-				</label>
+				<div className="flex flex-wrap gap-2">
+					{!!images.length &&
+						images.map((image) => (
+							<div className="flex-none h-40 rounded-md">
+								<img src={image} className="max-h-full"></img>
+							</div>
+						))}
+					<label className="flex-none w-32 h-40 flex flex-col justify-center items-center bg-neutral-300 rounded-md cursor-pointer">
+						Upload
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={1.5}
+							stroke="currentColor"
+							className="w-6 h-6"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+							/>
+						</svg>
+						<input
+							type="file"
+							className="hidden"
+							onChange={uploadImages}
+							multiple
+						></input>
+					</label>
+				</div>
 			</div>
 			<label className="flex flex-col gap-1">
 				Materials

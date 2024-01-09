@@ -8,7 +8,7 @@ export default function Layout({ children }) {
 
 	if (session) {
 		return (
-			<div className="w-full h-full bg-white text-black flex">
+			<div className="h-screen bg-white text-black flex">
 				<Navigation />
 				<div className="flex-auto">{children}</div>
 			</div>
