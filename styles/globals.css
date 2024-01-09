@@ -28,6 +28,18 @@ input:focus {
 	@apply bg-black text-white inline-flex gap-1 px-4 py-2 rounded-md justify-center;
 }
 
+.btn-danger {
+	@apply bg-red-500 text-white inline-flex gap-1 px-4 py-2 rounded-md justify-center;
+}
+
+.btn-danger:hover {
+	@apply bg-red-700;
+}
+
+.btn-normal {
+	@apply bg-white text-lime-700 border-2 border-lime-700 inline-flex gap-1 px-4 py-2 rounded-md justify-center;
+}
+
 .table-basic thead {
 	@apply font-semibold text-center;
 }

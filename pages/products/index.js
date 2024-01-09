@@ -1,3 +1,4 @@
+import Content from '@/components/Content';
 import Layout from '@/components/Layout';
 import axios from 'axios';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ export default function Products() {
 	}
 	return (
 		<Layout>
-			<div className="m-6">
+			<Content>
 				<h2 className="text-xl font-semibold mb-6">Products</h2>
 				<Link href="/products/new" className="btn-primary mb-6">
 					<svg
@@ -75,7 +76,7 @@ export default function Products() {
 											onClick={() =>
 												deleteProduct(product._id)
 											}
-											className="btn-primary"
+											className="btn-danger"
 										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +100,7 @@ export default function Products() {
 						))}
 					</tbody>
 				</table>
-			</div>
+			</Content>
 		</Layout>
 	);
 }
