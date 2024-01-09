@@ -1,3 +1,4 @@
+import { headers } from '@/next.config';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -34,6 +35,16 @@ export default function ProductForm({
 		}
 		router.replace('/products');
 	}
+	async function uploadImages(ev) {
+		const files = ev.target?.files;
+		if (files?.length > 0) {
+			let formData = new FormData();
+			for (let i = 0; i < files.length; i++) {
+				formData.append('file', files[i]);
+			}
+			const res = await axios.post('/api/upload', formData);
+		}
+	}
 	return (
 		<form className="flex flex-col gap-4" onSubmit={saveProduct}>
 			<label className="flex flex-col gap-1">
@@ -60,6 +71,32 @@ export default function ProductForm({
 					onChange={(ev) => setPrice(ev.target.value)}
 				></input>
 			</label>
+			<div className="flex flex-col gap-1">
+				Images
+				<label className="flex-none w-32 h-40 flex flex-col justify-center items-center bg-neutral-300 rounded-md cursor-pointer">
+					Upload
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+						/>
+					</svg>
+					<input
+						type="file"
+						className="hidden"
+						onChange={uploadImages}
+						multiple
+					></input>
+				</label>
+			</div>
 			<label className="flex flex-col gap-1">
 				Materials
 				<input

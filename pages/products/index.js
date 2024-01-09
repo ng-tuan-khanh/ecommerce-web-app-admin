@@ -1,13 +1,11 @@
 import Layout from '@/components/Layout';
 import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 export default function Products() {
 	const [products, setProducts] = useState([]);
 	const [deletedCount, setDeletedCount] = useState(0);
-	const router = useRouter();
 	useEffect(() => {
 		axios.get('/api/products').then((response) => {
 			setProducts(response.data);
@@ -41,8 +39,8 @@ export default function Products() {
 				<table className="table-basic w-full">
 					<thead>
 						<tr>
-							<td className="w-full">Product name</td>
-							<td>Options</td>
+							<td>Product name</td>
+							<td className="w-52">Options</td>
 						</tr>
 					</thead>
 					<tbody>
