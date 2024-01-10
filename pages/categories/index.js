@@ -9,11 +9,9 @@ export default function Categories() {
 	const [editedCategory, setEditedCategory] = useState(null);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState(null);
-	const [deletedCount, setDeletedCount] = useState(0);
-	useEffect(() => fetchCategories, [deletedCount]);
+	useEffect(() => fetchCategories);
 	function fetchCategories() {
 		axios.get('/api/categories').then((response) => {
-			console.log(response.data);
 			setCategories(response.data);
 		});
 	}
@@ -36,7 +34,7 @@ export default function Categories() {
 	}
 	async function deleteCategory(_id) {
 		await axios.delete('/api/categories/' + _id);
-		setDeletedCount((cnt) => cnt + 1);
+		fetchCategories();
 	}
 	function editCategory(category) {
 		setEditedCategory(category);
