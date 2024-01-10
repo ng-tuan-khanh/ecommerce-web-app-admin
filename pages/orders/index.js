@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 export default function Orders() {
 	const [orders, setOrders] = useState([]);
 	// filter has 3 possible states: all/pending/delivered
-	const [filter, setFilter] = useState('all');
+	const [filter, setFilter] = useState('pending');
 	const [updateEvent, setUpdateEvent] = useState(null);
 	useEffect(() => {
 		if (filter === 'all') {

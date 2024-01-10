@@ -9,10 +9,10 @@ export default async function handle(req, res) {
 			const filteredOrders = await Order.find({
 				state: query.state,
 			}).sort('-createdAt');
-			res.json(filteredOrders);
+			return res.json(filteredOrders);
 		}
 		const orders = await Order.find().sort('-createdAt');
-		res.json(orders);
+		return res.json(orders);
 	} else if (method === 'POST') {
 		const { product_info, quantity, customer, state } = req.body;
 		const newOrder = await Order.create({
@@ -21,6 +21,6 @@ export default async function handle(req, res) {
 			customer,
 			state,
 		});
-		res.json(newOrder);
+		return res.json(newOrder);
 	}
 }
