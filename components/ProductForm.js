@@ -1,35 +1,42 @@
 import { headers } from '@/next.config';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function ProductForm({
 	_id,
-	productName: _productName,
-	collectionName: _collectionName,
+	product_name: _productName,
+	category: _category,
 	price: _price,
 	images: _images,
 	materials: _materials,
-	careDescription: _careDescription,
+	care_description: _careDescription,
 }) {
 	const router = useRouter();
 	const [productName, setProductName] = useState(_productName || '');
-	const [collectionName, setCollectionName] = useState(_collectionName || '');
+	const [categoryId, setCategoryId] = useState(_category || null);
 	const [price, setPrice] = useState(_price || 0);
 	const [images, setImages] = useState(_images || []);
 	const [materials, setMaterials] = useState(_materials || '');
 	const [careDescription, setCareDescription] = useState(
 		_careDescription || ''
 	);
+	const [categories, setCategories] = useState([]);
+	useEffect(() => {
+		axios.get('/api/categories').then((response) => {
+			console.log(response.data);
+			setCategories(response.data);
+		});
+	}, []);
 	function saveProduct(ev) {
 		ev.preventDefault();
 		const data = {
-			productName,
-			collectionName,
+			product_name: productName,
+			category: categoryId,
 			price,
 			images,
 			materials,
-			careDescription,
+			care_description: careDescription,
 		};
 		if (_id) {
 			axios.put('/api/products/' + _id, { _id, ...data });
@@ -63,12 +70,20 @@ export default function ProductForm({
 				></input>
 			</label>
 			<label className="flex flex-col gap-1">
-				Collection name
-				<input
-					type="text"
-					value={collectionName}
-					onChange={(ev) => setCollectionName(ev.target.value)}
-				></input>
+				Category
+				<select
+					className="flex-grow"
+					value={categoryId}
+					onChange={(ev) => setCategoryId(ev.target.value)}
+				>
+					<option value="">No parent category</option>
+					{categories.length > 0 &&
+						categories.map((category) => (
+							<option key={category._id} value={category._id}>
+								{category.name}
+							</option>
+						))}
+				</select>
 			</label>
 			<label className="flex flex-col gap-1">
 				Price (in USD)

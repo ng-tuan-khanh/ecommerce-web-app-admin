@@ -6,43 +6,27 @@ export default async function handle(req, res) {
 	const { method } = req;
 	const { id } = req.query;
 	if (method === 'GET') {
-		const {
-			_id,
-			product_name: productName,
-			collection_name: collectionName,
-			price,
-			images,
-			materials,
-			care_description: careDescription,
-		} = await Product.findById(id);
-		res.json({
-			_id,
-			productName,
-			collectionName,
-			images,
-			price,
-			materials,
-			careDescription,
-		});
+		const product = await Product.findById(id);
+		res.json(product);
 	} else if (method === 'PUT') {
 		const {
 			_id,
-			productName,
-			collectionName,
+			product_name,
+			category,
 			price,
 			images,
 			materials,
-			careDescription,
+			care_description,
 		} = req.body;
 		await Product.updateOne(
 			{ _id },
 			{
-				product_name: productName,
-				collection_name: collectionName,
-				price: price,
-				images: images,
-				materials: materials,
-				care_description: careDescription,
+				product_name,
+				category,
+				price,
+				images,
+				materials,
+				care_description,
 			}
 		);
 		res.json(true);

@@ -60,6 +60,7 @@ export default function Categories() {
 					</label>
 					<div className="flex-grow flex gap-2">
 						<input
+							className="flex-grow"
 							type="text"
 							value={name}
 							onChange={(ev) => setName(ev.target.value)}
@@ -105,8 +106,8 @@ export default function Categories() {
 				<table className="table-basic w-full">
 					<thead>
 						<tr>
-							<td>Category name</td>
-							<td>Parent category</td>
+							<td className="w-1/2">Category name</td>
+							<td className="w-1/2">Parent category</td>
 							<td className="w-52">Options</td>
 						</tr>
 					</thead>

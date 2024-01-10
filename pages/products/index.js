@@ -40,14 +40,16 @@ export default function Products() {
 				<table className="table-basic w-full">
 					<thead>
 						<tr>
-							<td>Product name</td>
+							<td className="w-1/2">Product name</td>
+							<td className="w-1/2">Category name</td>
 							<td className="w-52">Options</td>
 						</tr>
 					</thead>
 					<tbody>
 						{products.map((product) => (
 							<tr key={product._id}>
-								<td>{product.productName}</td>
+								<td>{product.product_name}</td>
+								<td>{product.category?.name}</td>
 								<td>
 									<div className="flex gap-1">
 										<Link

@@ -5,37 +5,32 @@ export default async function handle(req, res) {
 	await mongooseConnect();
 	const { method } = req;
 	if (method === 'GET') {
-		const products = await Product.find();
-		res.json(
-			products.map((product) => {
-				const mappedProduct = {
-					_id: product._id,
-					productName: product.product_name,
-					collectionName: product.collection_name,
-					price: product.price,
-					images: product.images,
-					materials: product.materials,
-					careDescription: product.care_description,
-				};
-				return mappedProduct;
-			})
-		);
+		const products = await Product.find().populate('category');
+		res.json(products);
 	} else if (method === 'POST') {
 		const {
-			productName,
-			collectionName,
+			product_name,
+			category,
 			price,
 			images,
 			materials,
-			careDescription,
+			care_description,
 		} = req.body;
+		console.log({
+			product_name,
+			category,
+			price,
+			images,
+			materials,
+			care_description,
+		});
 		const newProduct = await Product.create({
-			product_name: productName,
-			collection_name: collectionName,
-			price: price,
-			images: images,
-			materials: materials,
-			care_description: careDescription,
+			product_name,
+			category,
+			price,
+			images,
+			materials,
+			care_description,
 		});
 		res.json(newProduct);
 	}
