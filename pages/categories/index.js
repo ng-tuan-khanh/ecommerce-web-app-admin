@@ -9,12 +9,12 @@ export default function Categories() {
 	const [editedCategory, setEditedCategory] = useState(null);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState(null);
-	useEffect(() => fetchCategories, []);
-	function fetchCategories() {
+	const [deletedCount, setDeletedCount] = useState(0);
+	useEffect(() => {
 		axios.get('/api/categories').then((response) => {
 			setCategories(response.data);
 		});
-	}
+	}, [deletedCount]);
 	async function saveCategory(ev) {
 		ev.preventDefault();
 		const data = {
@@ -30,11 +30,11 @@ export default function Categories() {
 		setEditedCategory(null);
 		setName('');
 		setParentId(null);
-		fetchCategories();
+		setDeletedCount((cnt) => cnt + 1);
 	}
 	async function deleteCategory(_id) {
 		await axios.delete('/api/categories/' + _id);
-		fetchCategories();
+		setDeletedCount((cnt) => cnt + 1);
 	}
 	function editCategory(category) {
 		setEditedCategory(category);
@@ -69,15 +69,11 @@ export default function Categories() {
 							onChange={(ev) => setParentId(ev.target.value)}
 						>
 							<option value="">No parent category</option>
-							{categories.length > 0 &&
-								categories.map((category) => (
-									<option
-										key={category._id}
-										value={category._id}
-									>
-										{category.name}
-									</option>
-								))}
+							{categories.map((category) => (
+								<option key={category._id} value={category._id}>
+									{category.name}
+								</option>
+							))}
 						</select>
 						<button
 							type="submit"
