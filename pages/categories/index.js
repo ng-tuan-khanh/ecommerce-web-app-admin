@@ -9,7 +9,7 @@ export default function Categories() {
 	const [editedCategory, setEditedCategory] = useState(null);
 	const [name, setName] = useState('');
 	const [parentId, setParentId] = useState(null);
-	useEffect(() => fetchCategories);
+	useEffect(() => fetchCategories, []);
 	function fetchCategories() {
 		axios.get('/api/categories').then((response) => {
 			setCategories(response.data);
