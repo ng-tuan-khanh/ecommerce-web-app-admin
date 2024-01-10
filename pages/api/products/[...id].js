@@ -47,7 +47,7 @@ export default async function handle(req, res) {
 		);
 		res.json(true);
 	} else if (method === 'DELETE') {
-		const deletedCount = await Product.deleteOne({ _id: id });
-		res.json(deletedCount);
+		await Product.deleteOne({ _id: id });
+		res.json(true);
 	}
 }

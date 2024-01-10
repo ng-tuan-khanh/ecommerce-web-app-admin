@@ -18,7 +18,6 @@ export default function Orders() {
 				setOrders(response.data);
 			});
 		}
-		console.log(filter, updateEvent);
 	}, [filter, updateEvent]);
 	async function onOrderDelivered(order) {
 		const updatedOrder = { ...order };
@@ -34,9 +33,9 @@ export default function Orders() {
 				<table className="table-basic w-full">
 					<thead>
 						<tr>
-							<td>Date</td>
-							<td>Customer</td>
-							<td>Product</td>
+							<td className="w-1/3">Date</td>
+							<td className="w-1/3">Customer</td>
+							<td className="w-1/3">Product</td>
 							<td className="w-24">State</td>
 						</tr>
 					</thead>

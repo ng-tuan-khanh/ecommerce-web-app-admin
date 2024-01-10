@@ -14,7 +14,6 @@ export default function Dashboard() {
 		axios.get('/api/dashboard').then((response) => {
 			const { numOrders, revenue, numProducts, numCustomers } =
 				response.data;
-			console.log(response.data);
 			setNumOrders(numOrders);
 			setRevenue(revenue);
 			setNumProducts(numProducts);

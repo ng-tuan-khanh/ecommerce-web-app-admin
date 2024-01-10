@@ -13,8 +13,8 @@ export default function Products() {
 		});
 	}, [deletedCount]);
 	async function deleteProduct(_id) {
-		const cnt = await axios.delete('/api/products/' + _id);
-		setDeletedCount(cnt);
+		await axios.delete('/api/products/' + _id);
+		setDeletedCount((cnt) => cnt + 1);
 	}
 	return (
 		<Layout>

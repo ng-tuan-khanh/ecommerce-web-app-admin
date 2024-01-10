@@ -1,3 +1,4 @@
+import Content from '@/components/Content';
 import Layout from '@/components/Layout';
 import ProductForm from '@/components/ProductForm';
 import axios from 'axios';
@@ -16,10 +17,10 @@ export default function EditProduct() {
 	}, id);
 	return (
 		<Layout>
-			<div className="m-6">
+			<Content>
 				<h2 className="text-xl font-semibold mb-6">Edit product</h2>
 				{product && <ProductForm {...product}></ProductForm>}
-			</div>
+			</Content>
 		</Layout>
 	);
 }

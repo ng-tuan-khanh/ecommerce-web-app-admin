@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 export default function Navigation() {
 	const inactiveLink = 'flex gap-2 px-6 py-3';
-	const activeLink = inactiveLink + ' bg-neutral-400/75 font-semibold';
+	const activeLink = inactiveLink + ' bg-neutral-400/50 font-semibold';
 	const { pathname } = useRouter();
 	return (
 		<div className="h-full flex-initial py-6">

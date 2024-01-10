@@ -16,11 +16,15 @@
 	}
 }
 
-input {
+input,
+select,
+option {
 	@apply border-2 border-neutral-300 rounded-md p-1;
 }
 
-input:focus {
+input:focus,
+select:focus,
+option:hover {
 	@apply border-black;
 }
 
@@ -41,7 +45,7 @@ input:focus {
 }
 
 .table-basic thead {
-	@apply font-semibold text-center;
+	@apply bg-neutral-400/50 font-semibold text-center;
 }
 
 .table-basic tr td {
