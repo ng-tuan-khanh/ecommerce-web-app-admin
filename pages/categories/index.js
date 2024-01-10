@@ -52,7 +52,7 @@ export default function Categories() {
 						{editedCategory ? (
 							<>
 								<span>Edit </span>
-								<span>"{editedCategory.name}"</span>
+								<span>{editedCategory.name}</span>
 							</>
 						) : (
 							'New category name'
