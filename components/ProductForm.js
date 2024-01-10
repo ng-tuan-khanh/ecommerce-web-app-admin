@@ -83,7 +83,10 @@ export default function ProductForm({
 				<div className="flex flex-wrap gap-2">
 					{!!images.length &&
 						images.map((image) => (
-							<div className="flex-none h-40 rounded-md">
+							<div
+								key={image}
+								className="flex-none h-40 rounded-md"
+							>
 								<img src={image} className="max-h-full"></img>
 							</div>
 						))}

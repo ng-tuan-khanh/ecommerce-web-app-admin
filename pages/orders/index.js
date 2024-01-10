@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 export default function Orders() {
 	const [orders, setOrders] = useState([]);
 	// filter has 3 possible states: all/pending/delivered
-	const [filter, setFilter] = useState('pending');
+	const [filter, setFilter] = useState('all');
 	const [updateEvent, setUpdateEvent] = useState(null);
 	useEffect(() => {
 		if (filter === 'all') {
@@ -42,7 +42,7 @@ export default function Orders() {
 					</thead>
 					<tbody>
 						{orders.map((order) => (
-							<tr>
+							<tr key={order._id}>
 								<td>
 									{order.created_at
 										.replace('T', ' ')
