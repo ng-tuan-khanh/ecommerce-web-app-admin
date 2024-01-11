@@ -11,7 +11,7 @@ export default function Navigation() {
 		<div className="h-full flex-none py-6">
 			<nav className="flex flex-col">
 				<Link href="/" className="flex justify-center mb-6">
-					<img src="/open_fashion.svg"></img>
+					<img className="w-32" src="/brand_logo.svg"></img>
 				</Link>
 				<Link
 					href="/"

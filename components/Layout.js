@@ -17,7 +17,7 @@ export default function Layout({ children }) {
 	return (
 		<div className="w-screen h-screen flex justify-center items-center">
 			<div className="flex flex-col justify-center items-center p-16 bg-neutral-400/50 rounded-lg">
-				<img src="/open_fashion.svg" className="w-32 h-32"></img>
+				<img src="/brand_logo.svg" className="w-32 h-32"></img>
 				<button
 					className="btn-primary"
 					onClick={() => signIn('google')}
