@@ -1,8 +1,9 @@
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import React from 'react';
 
 Sizes.auth = true;
+Sizes.role = 'employee';
 
 export default function Sizes() {
 	return (

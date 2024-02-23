@@ -1,10 +1,11 @@
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 Products.auth = true;
+Products.role = 'employee';
 
 export default function Products() {
 	const [products, setProducts] = useState([]);

@@ -8,8 +8,23 @@ export const authOptions = {
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			profile(profile) {
+				return {
+					id: profile.sub,
+					name: profile.name,
+					email: profile.email,
+					image: profile.picture,
+					role: profile.role ?? 'customer',
+				};
+			},
 		}),
 	],
+	callbacks: {
+		session({ session, user }) {
+			session.user.role = user.role;
+			return session;
+		},
+	},
 	adapter: MongoDBAdapter(clientPromise),
 	secret: process.env.NEXTAUTH_SECRET,
 };

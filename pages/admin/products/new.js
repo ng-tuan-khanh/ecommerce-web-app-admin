@@ -1,9 +1,10 @@
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import ProductForm from '@/components/ProductForm';
 import React from 'react';
 
 NewProduct.auth = true;
+NewProduct.role = 'employee';
 
 export default function NewProduct() {
 	return (

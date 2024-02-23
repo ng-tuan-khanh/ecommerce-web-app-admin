@@ -1,11 +1,12 @@
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import ProductForm from '@/components/ProductForm';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 EditProduct.auth = true;
+EditProduct.role = 'employee';
 
 export default function EditProduct() {
 	const [product, setProduct] = useState(null);

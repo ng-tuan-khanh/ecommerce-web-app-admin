@@ -1,9 +1,10 @@
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 Orders.auth = true;
+Orders.role = 'employee';
 
 export default function Orders() {
 	const [orders, setOrders] = useState([]);

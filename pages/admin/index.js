@@ -1,10 +1,11 @@
 import Card from '@/components/Card';
 import Content from '@/components/Content';
-import AdminLayout from '@/components/helpers/AdminLayout';
+import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 Dashboard.auth = true;
+Dashboard.role = 'employee';
 
 export default function Dashboard() {
 	const [numOrders, setNumOrders] = useState(0);
