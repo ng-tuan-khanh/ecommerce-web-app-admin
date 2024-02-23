@@ -1,7 +1,9 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+
+Orders.auth = true;
 
 export default function Orders() {
 	const [orders, setOrders] = useState([]);
@@ -27,7 +29,7 @@ export default function Orders() {
 		);
 	}
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Orders</h2>
 				<table className="table-basic w-full">
@@ -78,6 +80,6 @@ export default function Orders() {
 					</tbody>
 				</table>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

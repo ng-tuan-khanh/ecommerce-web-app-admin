@@ -1,8 +1,10 @@
 import Card from '@/components/Card';
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+
+Dashboard.auth = true;
 
 export default function Dashboard() {
 	const [numOrders, setNumOrders] = useState(0);
@@ -22,7 +24,7 @@ export default function Dashboard() {
 	}, []);
 
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Dashboard</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
@@ -35,6 +37,6 @@ export default function Dashboard() {
 					></Card>
 				</div>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

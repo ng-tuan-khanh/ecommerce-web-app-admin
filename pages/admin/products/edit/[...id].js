@@ -1,9 +1,11 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import ProductForm from '@/components/ProductForm';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+
+EditProduct.auth = true;
 
 export default function EditProduct() {
 	const [product, setProduct] = useState(null);
@@ -16,11 +18,11 @@ export default function EditProduct() {
 			.then((response) => setProduct(response.data));
 	}, id);
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Edit product</h2>
 				{product && <ProductForm {...product}></ProductForm>}
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

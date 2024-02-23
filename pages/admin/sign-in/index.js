@@ -1,26 +1,14 @@
+import { signIn } from 'next-auth/react';
 import React from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
 
-import Navigation from '@/components/Navigation';
-
-export default function Layout({ children }) {
-	const { data: session } = useSession();
-
-	if (session) {
-		return (
-			<div className="h-screen bg-white text-black flex">
-				<Navigation />
-				<div className="flex-auto">{children}</div>
-			</div>
-		);
-	}
+export default function SignIn() {
 	return (
 		<div className="w-screen h-screen flex justify-center items-center">
 			<div className="flex flex-col justify-center items-center p-16 bg-neutral-400/50 rounded-lg">
 				<img src="/brand_logo.svg" className="w-32 h-32"></img>
 				<button
 					className="btn-primary"
-					onClick={() => signIn('google')}
+					onClick={() => signIn('google', { callbackUrl: '/admin' })}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

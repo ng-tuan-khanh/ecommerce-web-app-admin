@@ -1,13 +1,15 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import React from 'react';
+
+Colors.auth = true;
 
 export default function Colors() {
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<div>This is the colors settings.</div>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

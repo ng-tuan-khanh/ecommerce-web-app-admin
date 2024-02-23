@@ -1,8 +1,9 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import axios from 'axios';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+
+Categories.auth = true;
 
 export default function Categories() {
 	const [categories, setCategories] = useState([]);
@@ -42,7 +43,7 @@ export default function Categories() {
 		setParentId(category.parent?._id || '');
 	}
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Categories</h2>
 				<form className="mb-6" onSubmit={saveCategory}>
@@ -163,6 +164,6 @@ export default function Categories() {
 					</tbody>
 				</table>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

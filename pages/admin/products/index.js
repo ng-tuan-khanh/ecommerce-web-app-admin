@@ -1,8 +1,10 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import axios from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+
+Products.auth = true;
 
 export default function Products() {
 	const [products, setProducts] = useState([]);
@@ -17,7 +19,7 @@ export default function Products() {
 		setDeletedCount((cnt) => cnt + 1);
 	}
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Products</h2>
 				<Link href="/products/new" className="btn-primary mb-6">
@@ -103,6 +105,6 @@ export default function Products() {
 					</tbody>
 				</table>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }

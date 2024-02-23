@@ -1,13 +1,15 @@
 import Content from '@/components/Content';
-import Layout from '@/components/Layout';
+import AdminLayout from '@/components/helpers/AdminLayout';
 import React from 'react';
+
+LandingPage.auth = true;
 
 export default function LandingPage() {
 	return (
-		<Layout>
+		<AdminLayout>
 			<Content>
 				<div>This is the landing page settings.</div>
 			</Content>
-		</Layout>
+		</AdminLayout>
 	);
 }
