@@ -1,5 +1,6 @@
 import Auth from '@/components/Auth';
 import '@/styles/globals.css';
+import '@radix-ui/themes/styles.css';
 import { SessionProvider } from 'next-auth/react';
 
 export default function App({

@@ -2,26 +2,44 @@ import Content from '@/components/Content';
 import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Button, Callout, Table } from '@radix-ui/themes';
 
 Categories.auth = true;
 Categories.role = 'employee';
 
 export default function Categories() {
 	const [categories, setCategories] = useState([]);
-	const [editedCategory, setEditedCategory] = useState(null);
+	const [groups, setGroups] = useState([]);
+
+	const [editedCategory, setEditedCategory] = useState('');
 	const [name, setName] = useState('');
-	const [parentId, setParentId] = useState(null);
+	const [parent, setParent] = useState('');
 	const [deletedCount, setDeletedCount] = useState(0);
+
+	const [error, setError] = useState(false);
+
 	useEffect(() => {
 		axios.get('/api/categories').then((response) => {
 			setCategories(response.data);
 		});
 	}, [deletedCount]);
+	useEffect(() => {
+		axios.get('/api/groups').then((response) => {
+			setGroups(response.data);
+		});
+	}, []);
+
 	async function saveCategory(ev) {
 		ev.preventDefault();
+
+		if (name === '' || parent === '') {
+			setError(true);
+			return;
+		}
+
 		const data = {
 			name,
-			parent: parentId,
+			parent: parent,
 		};
 		if (!editedCategory) {
 			await axios.post('/api/categories', data);
@@ -29,9 +47,10 @@ export default function Categories() {
 			await axios.put(`/api/categories/${editedCategory._id}`, data);
 		}
 
-		setEditedCategory(null);
+		setError(false);
+		setEditedCategory('');
 		setName('');
-		setParentId(null);
+		setParent('');
 		setDeletedCount((cnt) => cnt + 1);
 	}
 	async function deleteCategory(_id) {
@@ -39,15 +58,16 @@ export default function Categories() {
 		setDeletedCount((cnt) => cnt + 1);
 	}
 	function editCategory(category) {
+		setError(false);
 		setEditedCategory(category);
 		setName(category.name);
-		setParentId(category.parent?._id || '');
+		setParent(category.parent?._id || '');
 	}
 	return (
 		<AdminLayout>
 			<Content>
 				<h2 className="text-xl font-semibold mb-6">Categories</h2>
-				<form className="mb-6" onSubmit={saveCategory}>
+				<form className="" onSubmit={saveCategory}>
 					<label className="block mb-1">
 						{editedCategory ? (
 							<>
@@ -67,20 +87,17 @@ export default function Categories() {
 						></input>
 						<select
 							className="flex-grow"
-							value={parentId}
-							onChange={(ev) => setParentId(ev.target.value)}
+							value={parent}
+							onChange={(ev) => setParent(ev.target.value)}
 						>
 							<option value="">No parent category</option>
-							{categories.map((category) => (
-								<option key={category._id} value={category._id}>
-									{category.name}
+							{groups.map((group) => (
+								<option key={group._id} value={group._id}>
+									{group.name}
 								</option>
 							))}
 						</select>
-						<button
-							type="submit"
-							className="btn-primary w-24 h-10 flex-none"
-						>
+						<Button size="3" variant="surface" type="submit">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -96,26 +113,60 @@ export default function Categories() {
 								/>
 							</svg>
 							Save
-						</button>
+						</Button>
 					</div>
+					{error && (
+						<Callout.Root color="red" role="alert" className="mt-2">
+							<Callout.Icon>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+									/>
+								</svg>
+							</Callout.Icon>
+							<Callout.Text>
+								Invalid input. You will need to enter again.
+							</Callout.Text>
+						</Callout.Root>
+					)}
 				</form>
-				<table className="table-basic w-full">
-					<thead>
-						<tr>
-							<td className="w-1/2">Category name</td>
-							<td className="w-1/2">Parent category</td>
-							<td className="w-52">Options</td>
-						</tr>
-					</thead>
-					<tbody>
+				<Table.Root variant="surface" className="mt-6">
+					<Table.Header>
+						<Table.Row>
+							<Table.ColumnHeaderCell justify={'center'}>
+								Category name
+							</Table.ColumnHeaderCell>
+							<Table.ColumnHeaderCell justify={'center'}>
+								Group
+							</Table.ColumnHeaderCell>
+							<Table.ColumnHeaderCell justify={'center'}>
+								Options
+							</Table.ColumnHeaderCell>
+						</Table.Row>
+					</Table.Header>
+					<Table.Body>
+						{console.log(categories)}
 						{categories.map((category) => (
-							<tr key={category._id}>
-								<td>{category.name}</td>
-								<td>{category.parent?.name}</td>
-								<td>
-									<div className="flex gap-1">
-										<button
-											className="btn-primary"
+							<Table.Row align={'center'}>
+								<Table.RowHeaderCell justify={'center'}>
+									{category.name}
+								</Table.RowHeaderCell>
+								<Table.Cell justify={'center'}>
+									{category.parent?.name}
+								</Table.Cell>
+								<Table.Cell justify={'center'}>
+									<div className="flex gap-2 justify-center">
+										<Button
+											variant="surface"
 											onClick={() => {
 												editCategory(category);
 											}}
@@ -135,12 +186,13 @@ export default function Categories() {
 												/>
 											</svg>
 											<span>Edit</span>
-										</button>
-										<button
+										</Button>
+										<Button
+											variant="surface"
+											color="crimson"
 											onClick={() =>
 												deleteCategory(category._id)
 											}
-											className="btn-danger"
 										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -157,13 +209,13 @@ export default function Categories() {
 												/>
 											</svg>
 											<span>Delete</span>
-										</button>
+										</Button>
 									</div>
-								</td>
-							</tr>
+								</Table.Cell>
+							</Table.Row>
 						))}
-					</tbody>
-				</table>
+					</Table.Body>
+				</Table.Root>
 			</Content>
 		</AdminLayout>
 	);
