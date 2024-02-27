@@ -2,7 +2,7 @@ import Content from '@/components/Content';
 import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Callout, Table } from '@radix-ui/themes';
+import { Button, Callout, Heading, Table, TextField } from '@radix-ui/themes';
 
 Categories.auth = true;
 Categories.role = 'employee';
@@ -66,13 +66,15 @@ export default function Categories() {
 	return (
 		<AdminLayout>
 			<Content>
-				<h2 className="text-xl font-semibold mb-6">Categories</h2>
+				<Heading as="h2" className="text-xl font-semibold mb-6">
+					Categories
+				</Heading>
 				<form className="" onSubmit={saveCategory}>
 					<label className="block mb-1">
 						{editedCategory ? (
 							<>
-								<span>Edit </span>
-								<span>{editedCategory.name}</span>
+								<Text>Edit </Text>
+								<Text>{editedCategory.name}</Text>
 							</>
 						) : (
 							'New category name'
@@ -142,13 +144,22 @@ export default function Categories() {
 				<Table.Root variant="surface" className="mt-6">
 					<Table.Header>
 						<Table.Row>
-							<Table.ColumnHeaderCell justify={'center'}>
+							<Table.ColumnHeaderCell
+								width="33%"
+								justify={'center'}
+							>
 								Category name
 							</Table.ColumnHeaderCell>
-							<Table.ColumnHeaderCell justify={'center'}>
+							<Table.ColumnHeaderCell
+								width="33%"
+								justify={'center'}
+							>
 								Group
 							</Table.ColumnHeaderCell>
-							<Table.ColumnHeaderCell justify={'center'}>
+							<Table.ColumnHeaderCell
+								width="33%"
+								justify={'center'}
+							>
 								Options
 							</Table.ColumnHeaderCell>
 						</Table.Row>
