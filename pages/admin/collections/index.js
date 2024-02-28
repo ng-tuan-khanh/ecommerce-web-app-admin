@@ -2,85 +2,76 @@ import Content from '@/components/Content';
 import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Callout, Heading, Table, TextField } from '@radix-ui/themes';
+import { Button, Callout, Heading, Table } from '@radix-ui/themes';
 import Head from 'next/head';
 
-Categories.auth = true;
-Categories.role = 'employee';
+Collections.auth = true;
+Collections.role = 'employee';
 
-export default function Categories() {
-	const [categories, setCategories] = useState([]);
-	const [groups, setGroups] = useState([]);
+export default function Collections() {
+	const [collections, setCollections] = useState([]);
 
-	const [editedCategory, setEditedCategory] = useState('');
+	const [editedCollection, setEditedCollection] = useState('');
 	const [name, setName] = useState('');
-	const [parent, setParent] = useState('');
 	const [deletedCount, setDeletedCount] = useState(0);
 
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
-		axios.get('/api/categories').then((response) => {
-			setCategories(response.data);
+		axios.get('/api/collections').then((response) => {
+			setCollections(response.data);
 		});
 	}, [deletedCount]);
-	useEffect(() => {
-		axios.get('/api/groups').then((response) => {
-			setGroups(response.data);
-		});
-	}, []);
 
-	async function saveCategory(ev) {
+	async function saveCollection(ev) {
 		ev.preventDefault();
 
-		if (name === '' || parent === '') {
+		if (name === '') {
 			setError(true);
 			return;
 		}
 
 		const data = {
 			name,
-			parent: parent,
+			featured: true,
 		};
-		if (!editedCategory) {
-			await axios.post('/api/categories', data);
+		if (!editedCollection) {
+			await axios.post('/api/collections', data);
 		} else {
-			await axios.put(`/api/categories/${editedCategory._id}`, data);
+			await axios.put(`/api/collections/${editedCollection._id}`, data);
 		}
 
 		setError(false);
-		setEditedCategory('');
+		setEditedCollection('');
 		setName('');
-		setParent('');
 		setDeletedCount((cnt) => cnt + 1);
 	}
-	async function deleteCategory(_id) {
-		await axios.delete('/api/categories/' + _id);
+	async function deleteCollection(_id) {
+		await axios.delete('/api/collections/' + _id);
 		setDeletedCount((cnt) => cnt + 1);
 	}
-	function editCategory(category) {
+	function editCollection(collection) {
 		setError(false);
-		setEditedCategory(category);
-		setName(category.name);
-		setParent(category.parent?._id || '');
+		setEditedCollection(collection);
+		setName(collection.name);
 	}
 	return (
 		<>
 			<Head>
-				<title>Open Fashion | Categories</title>
+				<title>Open Fashion | Collections</title>
 			</Head>
 			<AdminLayout>
 				<Content>
-					<Heading>Categories</Heading>
-					<form onSubmit={saveCategory}>
+					<Heading>Collections</Heading>
+					<form onSubmit={saveCollection}>
 						<label className="block mb-1">
-							{editedCategory ? (
+							{editedCollection ? (
 								<>
 									<span>Edit </span>
-									<span>{editedCategory.name}</span>
+									<span>{editedCollection.name}</span>
 								</>
 							) : (
-								'New category name'
+								'New collection name'
 							)}
 						</label>
 						<div className="flex-grow flex gap-2">
@@ -90,18 +81,6 @@ export default function Categories() {
 								value={name}
 								onChange={(ev) => setName(ev.target.value)}
 							></input>
-							<select
-								className="flex-grow"
-								value={parent}
-								onChange={(ev) => setParent(ev.target.value)}
-							>
-								<option value="">No parent category</option>
-								{groups.map((group) => (
-									<option key={group._id} value={group._id}>
-										{group.name}
-									</option>
-								))}
-							</select>
 							<Button size="3" variant="surface" type="submit">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -152,19 +131,13 @@ export default function Categories() {
 						<Table.Header>
 							<Table.Row>
 								<Table.ColumnHeaderCell
-									width="33%"
+									width="50%"
 									justify={'center'}
 								>
-									Category name
+									Collection name
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
-									width="33%"
-									justify={'center'}
-								>
-									Group
-								</Table.ColumnHeaderCell>
-								<Table.ColumnHeaderCell
-									width="33%"
+									width="50%"
 									justify={'center'}
 								>
 									Options
@@ -172,20 +145,17 @@ export default function Categories() {
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>
-							{categories.map((category) => (
+							{collections.map((collection) => (
 								<Table.Row align={'center'}>
 									<Table.RowHeaderCell justify={'center'}>
-										{category.name}
+										{collection.name}
 									</Table.RowHeaderCell>
-									<Table.Cell justify={'center'}>
-										{category.parent?.name}
-									</Table.Cell>
 									<Table.Cell justify={'center'}>
 										<div className="flex gap-2 justify-center">
 											<Button
 												variant="surface"
 												onClick={() => {
-													editCategory(category);
+													editCollection(collection);
 												}}
 											>
 												<svg
@@ -208,7 +178,9 @@ export default function Categories() {
 												variant="surface"
 												color="crimson"
 												onClick={() =>
-													deleteCategory(category._id)
+													deleteCollection(
+														collection._id
+													)
 												}
 											>
 												<svg

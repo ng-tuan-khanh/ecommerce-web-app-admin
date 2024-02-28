@@ -24,7 +24,6 @@ export default function ProductForm({
 	const [categories, setCategories] = useState([]);
 	useEffect(() => {
 		axios.get('/api/categories').then((response) => {
-			console.log(response.data);
 			setCategories(response.data);
 		});
 	}, []);

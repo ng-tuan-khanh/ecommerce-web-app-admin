@@ -4,6 +4,7 @@ import ProductForm from '@/components/ProductForm';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { Heading } from '@radix-ui/themes';
 
 EditProduct.auth = true;
 EditProduct.role = 'employee';
@@ -21,7 +22,7 @@ export default function EditProduct() {
 	return (
 		<AdminLayout>
 			<Content>
-				<h2 className="text-xl font-semibold mb-6">Edit product</h2>
+				<Heading>Edit product</Heading>
 				{product && <ProductForm {...product}></ProductForm>}
 			</Content>
 		</AdminLayout>
