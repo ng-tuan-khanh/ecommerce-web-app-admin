@@ -165,7 +165,7 @@ export default function Colors() {
 						</Table.Header>
 						<Table.Body>
 							{colors.map((color) => (
-								<Table.Row id={color._id} align="center">
+								<Table.Row key={color._id} align="center">
 									<Table.RowHeaderCell justify="center">
 										{color.name}
 									</Table.RowHeaderCell>

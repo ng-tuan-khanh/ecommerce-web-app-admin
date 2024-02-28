@@ -146,7 +146,7 @@ export default function Sizes() {
 						</Table.Header>
 						<Table.Body>
 							{sizes.map((size) => (
-								<Table.Row id={size._id} align="center">
+								<Table.Row key={size._id} align="center">
 									<Table.RowHeaderCell justify="center">
 										{size.name}
 									</Table.RowHeaderCell>
