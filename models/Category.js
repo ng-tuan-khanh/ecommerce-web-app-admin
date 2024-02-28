@@ -4,7 +4,8 @@ const categorySchema = new Schema({
 	name: { type: String, required: true },
 	parent: {
 		type: Schema.Types.ObjectId,
-		ref: 'Category',
+		ref: 'Group',
+		required: true,
 	},
 });
 

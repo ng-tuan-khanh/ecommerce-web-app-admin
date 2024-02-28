@@ -10,12 +10,14 @@ export default function Navigation() {
 	return (
 		<div className="h-full flex-none py-6">
 			<nav className="flex flex-col">
-				<Link href="/" className="flex justify-center mb-6">
+				<Link href="/admin" className="flex justify-center mb-6">
 					<img className="w-32" src="/brand_logo.svg"></img>
 				</Link>
 				<Link
-					href="/"
-					className={pathname === '/' ? activeLink : inactiveLink}
+					href="/admin"
+					className={
+						pathname === '/admin' ? activeLink : inactiveLink
+					}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +36,53 @@ export default function Navigation() {
 					<span>Dashboard</span>
 				</Link>
 				<Link
-					href="/products"
+					href="/admin/orders"
+					className={
+						pathname.includes('/orders') ? activeLink : inactiveLink
+					}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+						/>
+					</svg>
+					<span>Orders</span>
+				</Link>
+				<Link
+					href="/admin/landing"
+					className={
+						pathname.includes('/landing')
+							? activeLink
+							: inactiveLink
+					}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z"
+						/>
+					</svg>
+					<span>Landing Page</span>
+				</Link>
+				<Link
+					href="/admin/products"
 					className={
 						pathname.includes('/products')
 							? activeLink
@@ -58,7 +106,31 @@ export default function Navigation() {
 					<span>Products</span>
 				</Link>
 				<Link
-					href="/categories"
+					href="/admin/collections"
+					className={
+						pathname.includes('/collections')
+							? activeLink
+							: inactiveLink
+					}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+						/>
+					</svg>
+					<span>Collections</span>
+				</Link>
+				<Link
+					href="/admin/categories"
 					className={
 						pathname.includes('/categories')
 							? activeLink
@@ -87,9 +159,9 @@ export default function Navigation() {
 					<span>Categories</span>
 				</Link>
 				<Link
-					href="/orders"
+					href="/admin/colors"
 					className={
-						pathname.includes('/orders') ? activeLink : inactiveLink
+						pathname.includes('/colors') ? activeLink : inactiveLink
 					}
 				>
 					<svg
@@ -103,16 +175,56 @@ export default function Navigation() {
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
-							d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+							d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42"
 						/>
 					</svg>
-					<span>Orders</span>
+					<span>Colors</span>
 				</Link>
-				<button
-					href="/"
-					className={inactiveLink}
-					onClick={() => signOut()}
+				<Link
+					href="/admin/sizes"
+					className={
+						pathname.includes('/sizes') ? activeLink : inactiveLink
+					}
 				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
+						/>
+					</svg>
+					<span>Sizes</span>
+				</Link>
+				<Link
+					href="/admin/roles"
+					className={
+						pathname.includes('/roles') ? activeLink : inactiveLink
+					}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="w-6 h-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+						/>
+					</svg>
+					<span>Roles</span>
+				</Link>
+				<button className={inactiveLink} onClick={() => signOut()}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"

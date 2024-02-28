@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 export default function ProductForm({
 	_id,
 	product_name: _productName,
+	collection_: _collection,
 	category: _category,
 	price: _price,
 	images: _images,
@@ -14,7 +15,8 @@ export default function ProductForm({
 }) {
 	const router = useRouter();
 	const [productName, setProductName] = useState(_productName || '');
-	const [categoryId, setCategoryId] = useState(_category || null);
+	const [collectionId, setCollectionId] = useState(_collection || '');
+	const [categoryId, setCategoryId] = useState(_category || '');
 	const [price, setPrice] = useState(_price || 0);
 	const [images, setImages] = useState(_images || []);
 	const [materials, setMaterials] = useState(_materials || '');
@@ -22,10 +24,16 @@ export default function ProductForm({
 		_careDescription || ''
 	);
 	const [categories, setCategories] = useState([]);
+	const [collections, setCollections] = useState([]);
+
 	useEffect(() => {
 		axios.get('/api/categories').then((response) => {
-			console.log(response.data);
 			setCategories(response.data);
+		});
+	}, []);
+	useEffect(() => {
+		axios.get('/api/collections').then((response) => {
+			setCollections(response.data);
 		});
 	}, []);
 	function saveProduct(ev) {
@@ -33,6 +41,7 @@ export default function ProductForm({
 		const data = {
 			product_name: productName,
 			category: categoryId,
+			collection_: collectionId,
 			price,
 			images,
 			materials,
@@ -43,7 +52,7 @@ export default function ProductForm({
 		} else {
 			axios.post('/api/products', data);
 		}
-		router.replace('/products');
+		router.replace('/admin/products');
 	}
 	async function uploadImages(ev) {
 		const files = ev.target?.files;
@@ -76,11 +85,27 @@ export default function ProductForm({
 					value={categoryId}
 					onChange={(ev) => setCategoryId(ev.target.value)}
 				>
-					<option value="">No parent category</option>
+					<option value="">No category</option>
 					{categories.length > 0 &&
 						categories.map((category) => (
 							<option key={category._id} value={category._id}>
 								{category.name}
+							</option>
+						))}
+				</select>
+			</label>
+			<label className="flex flex-col gap-1">
+				Collection
+				<select
+					className="flex-grow"
+					value={collectionId}
+					onChange={(ev) => setCollectionId(ev.target.value)}
+				>
+					<option value="">No collection</option>
+					{collections.length > 0 &&
+						collections.map((collection) => (
+							<option key={collection._id} value={collection._id}>
+								{collection.name}
 							</option>
 						))}
 				</select>

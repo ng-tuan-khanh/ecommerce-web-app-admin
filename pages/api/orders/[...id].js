@@ -7,7 +7,6 @@ export default async function handle(req, res) {
 	if (method === 'PUT') {
 		const { _id, createdAt, productInfo, quantity, customer, state } =
 			req.body;
-		console.log(_id, createdAt, productInfo, quantity, customer, state);
 		await Order.updateOne(
 			{ _id },
 			{

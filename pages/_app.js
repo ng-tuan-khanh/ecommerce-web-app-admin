@@ -1,4 +1,6 @@
+import Auth from '@/components/Auth';
 import '@/styles/globals.css';
+import '@radix-ui/themes/styles.css';
 import { SessionProvider } from 'next-auth/react';
 
 export default function App({
@@ -7,7 +9,13 @@ export default function App({
 }) {
 	return (
 		<SessionProvider session={session}>
-			<Component {...pageProps} />
+			{Component.auth ? (
+				<Auth pageRole={Component.role}>
+					<Component {...pageProps} />
+				</Auth>
+			) : (
+				<Component {...pageProps} />
+			)}
 		</SessionProvider>
 	);
 }
