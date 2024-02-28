@@ -61,10 +61,8 @@ export default function Sizes() {
 			</Head>
 			<AdminLayout>
 				<Content>
-					<Heading as="h2" className="text-xl font-semibold mb-6">
-						Sizes
-					</Heading>
-					<form className="" onSubmit={saveSize}>
+					<Heading>Sizes</Heading>
+					<form onSubmit={saveSize}>
 						<label className="block mb-1">
 							{editedSize ? (
 								<>
@@ -133,14 +131,14 @@ export default function Sizes() {
 						<Table.Header>
 							<Table.Row>
 								<Table.ColumnHeaderCell
-									width={'50%'}
-									justify={'center'}
+									width="50%"
+									justify="center"
 								>
 									Size
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
-									width={'50%'}
-									justify={'center'}
+									width="50%"
+									justify="center"
 								>
 									Options
 								</Table.ColumnHeaderCell>
@@ -148,11 +146,11 @@ export default function Sizes() {
 						</Table.Header>
 						<Table.Body>
 							{sizes.map((size) => (
-								<Table.Row align={'center'}>
-									<Table.RowHeaderCell justify={'center'}>
+								<Table.Row id={size._id} align="center">
+									<Table.RowHeaderCell justify="center">
 										{size.name}
 									</Table.RowHeaderCell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										<div className="flex gap-2 justify-center">
 											<Button
 												variant="surface"

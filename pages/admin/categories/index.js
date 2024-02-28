@@ -153,19 +153,19 @@ export default function Categories() {
 							<Table.Row>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Category name
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Group
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Options
 								</Table.ColumnHeaderCell>
@@ -173,14 +173,14 @@ export default function Categories() {
 						</Table.Header>
 						<Table.Body>
 							{categories.map((category) => (
-								<Table.Row align={'center'}>
-									<Table.RowHeaderCell justify={'center'}>
+								<Table.Row key={category._id} align="center">
+									<Table.RowHeaderCell justify="center">
 										{category.name}
 									</Table.RowHeaderCell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										{category.parent?.name}
 									</Table.Cell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										<div className="flex gap-2 justify-center">
 											<Button
 												variant="surface"

@@ -3,6 +3,7 @@ import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { Heading, Table } from '@radix-ui/themes';
 
 Orders.auth = true;
 Orders.role = 'employee';
@@ -37,35 +38,54 @@ export default function Orders() {
 			</Head>
 			<AdminLayout>
 				<Content>
-					<h2 className="text-xl font-semibold mb-6">Orders</h2>
-					<table className="table-basic w-full">
-						<thead>
-							<tr>
-								<td className="w-1/3">Date</td>
-								<td className="w-1/3">Customer</td>
-								<td className="w-1/3">Product</td>
-								<td className="w-24">State</td>
-							</tr>
-						</thead>
-						<tbody>
+					<div className="mb-2">
+						<Heading>Orders</Heading>
+					</div>
+					<Table.Root variant="surface">
+						<Table.Header>
+							<Table.Row>
+								<Table.ColumnHeaderCell
+									width="33%"
+									justify="center"
+								>
+									Date
+								</Table.ColumnHeaderCell>
+								<Table.ColumnHeaderCell
+									width="33%"
+									justify="center"
+								>
+									Customer
+								</Table.ColumnHeaderCell>
+								<Table.ColumnHeaderCell
+									width="33%"
+									justify="center"
+								>
+									Product
+								</Table.ColumnHeaderCell>
+								<Table.ColumnHeaderCell justify="center">
+									State
+								</Table.ColumnHeaderCell>
+							</Table.Row>
+						</Table.Header>
+						<Table.Body>
 							{orders.map((order) => (
-								<tr key={order._id}>
-									<td>
+								<Table.Row key={order._id} align="center">
+									<Table.RowHeaderCell justify="center">
 										{order.created_at
 											.replace('T', ' ')
 											.slice(0, 19)}
-									</td>
-									<td>
+									</Table.RowHeaderCell>
+									<Table.Cell justify="center">
 										{order.customer.customer_name}
 										<br />
 										{order.customer.address}
-									</td>
-									<td>
+									</Table.Cell>
+									<Table.Cell justify="center">
 										{order.quantity +
 											' x ' +
 											order.product_info.product_name}
-									</td>
-									<td>
+									</Table.Cell>
+									<Table.Cell justify="center">
 										{order.state === 'pending' ? (
 											<button
 												onClick={() => {
@@ -80,11 +100,11 @@ export default function Orders() {
 												<span>Delivered</span>
 											</div>
 										)}
-									</td>
-								</tr>
+									</Table.Cell>
+								</Table.Row>
 							))}
-						</tbody>
-					</table>
+						</Table.Body>
+					</Table.Root>
 				</Content>
 			</AdminLayout>
 		</>

@@ -132,13 +132,13 @@ export default function Collections() {
 							<Table.Row>
 								<Table.ColumnHeaderCell
 									width="50%"
-									justify={'center'}
+									justify="center"
 								>
 									Collection name
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
 									width="50%"
-									justify={'center'}
+									justify="center"
 								>
 									Options
 								</Table.ColumnHeaderCell>
@@ -146,11 +146,11 @@ export default function Collections() {
 						</Table.Header>
 						<Table.Body>
 							{collections.map((collection) => (
-								<Table.Row align={'center'}>
-									<Table.RowHeaderCell justify={'center'}>
+								<Table.Row key={collection._id} align="center">
+									<Table.RowHeaderCell justify="center">
 										{collection.name}
 									</Table.RowHeaderCell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										<div className="flex gap-2 justify-center">
 											<Button
 												variant="surface"

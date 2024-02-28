@@ -4,6 +4,7 @@ import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { Heading } from '@radix-ui/themes';
 
 Dashboard.auth = true;
 Dashboard.role = 'employee';
@@ -32,7 +33,9 @@ export default function Dashboard() {
 			</Head>
 			<AdminLayout>
 				<Content>
-					<h2 className="text-xl font-semibold mb-6">Dashboard</h2>
+					<div className="mb-2">
+						<Heading>Dashboard</Heading>
+					</div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6">
 						<Card
 							data={numOrders}

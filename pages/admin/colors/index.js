@@ -145,19 +145,19 @@ export default function Colors() {
 							<Table.Row>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Color
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Hexadecimal
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
 									width="33%"
-									justify={'center'}
+									justify="center"
 								>
 									Options
 								</Table.ColumnHeaderCell>
@@ -165,14 +165,14 @@ export default function Colors() {
 						</Table.Header>
 						<Table.Body>
 							{colors.map((color) => (
-								<Table.Row align={'center'}>
-									<Table.RowHeaderCell justify={'center'}>
+								<Table.Row id={color._id} align="center">
+									<Table.RowHeaderCell justify="center">
 										{color.name}
 									</Table.RowHeaderCell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										{`#${color.hex}`}
 									</Table.Cell>
-									<Table.Cell justify={'center'}>
+									<Table.Cell justify="center">
 										<div className="flex gap-2 justify-center">
 											<Button
 												variant="surface"
