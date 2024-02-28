@@ -2,6 +2,7 @@ import Content from '@/components/Content';
 import AdminLayout from '@/components/AdminLayout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 
 Orders.auth = true;
 Orders.role = 'employee';
@@ -30,57 +31,62 @@ export default function Orders() {
 		);
 	}
 	return (
-		<AdminLayout>
-			<Content>
-				<h2 className="text-xl font-semibold mb-6">Orders</h2>
-				<table className="table-basic w-full">
-					<thead>
-						<tr>
-							<td className="w-1/3">Date</td>
-							<td className="w-1/3">Customer</td>
-							<td className="w-1/3">Product</td>
-							<td className="w-24">State</td>
-						</tr>
-					</thead>
-					<tbody>
-						{orders.map((order) => (
-							<tr key={order._id}>
-								<td>
-									{order.created_at
-										.replace('T', ' ')
-										.slice(0, 19)}
-								</td>
-								<td>
-									{order.customer.customer_name}
-									<br />
-									{order.customer.address}
-								</td>
-								<td>
-									{order.quantity +
-										' x ' +
-										order.product_info.product_name}
-								</td>
-								<td>
-									{order.state === 'pending' ? (
-										<button
-											onClick={() => {
-												onOrderDelivered(order);
-											}}
-											className="btn-danger w-full"
-										>
-											<span>Pending</span>
-										</button>
-									) : (
-										<div className="btn-normal w-full">
-											<span>Delivered</span>
-										</div>
-									)}
-								</td>
+		<>
+			<Head>
+				<title>Open Fashion | Orders</title>
+			</Head>
+			<AdminLayout>
+				<Content>
+					<h2 className="text-xl font-semibold mb-6">Orders</h2>
+					<table className="table-basic w-full">
+						<thead>
+							<tr>
+								<td className="w-1/3">Date</td>
+								<td className="w-1/3">Customer</td>
+								<td className="w-1/3">Product</td>
+								<td className="w-24">State</td>
 							</tr>
-						))}
-					</tbody>
-				</table>
-			</Content>
-		</AdminLayout>
+						</thead>
+						<tbody>
+							{orders.map((order) => (
+								<tr key={order._id}>
+									<td>
+										{order.created_at
+											.replace('T', ' ')
+											.slice(0, 19)}
+									</td>
+									<td>
+										{order.customer.customer_name}
+										<br />
+										{order.customer.address}
+									</td>
+									<td>
+										{order.quantity +
+											' x ' +
+											order.product_info.product_name}
+									</td>
+									<td>
+										{order.state === 'pending' ? (
+											<button
+												onClick={() => {
+													onOrderDelivered(order);
+												}}
+												className="btn-danger w-full"
+											>
+												<span>Pending</span>
+											</button>
+										) : (
+											<div className="btn-normal w-full">
+												<span>Delivered</span>
+											</div>
+										)}
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</Content>
+			</AdminLayout>
+		</>
 	);
 }

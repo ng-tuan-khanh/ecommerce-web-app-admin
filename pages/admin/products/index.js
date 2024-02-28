@@ -64,6 +64,12 @@ export default function Products() {
 									width="33%"
 									justify="center"
 								>
+									Collection name
+								</Table.ColumnHeaderCell>
+								<Table.ColumnHeaderCell
+									width="33%"
+									justify="center"
+								>
 									Category name
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
@@ -77,13 +83,16 @@ export default function Products() {
 						<Table.Body>
 							{products.map((product) => (
 								<Table.Row key={product._id} align="center">
-									<Table.RowHeaderCell>
+									<Table.RowHeaderCell justify="center">
 										{product.product_name}
 									</Table.RowHeaderCell>
-									<Table.Cell>
+									<Table.Cell justify="center">
+										{product.collection_?.name}
+									</Table.Cell>
+									<Table.Cell justify="center">
 										{product.category?.name}
 									</Table.Cell>
-									<Table.Cell>
+									<Table.Cell justify="center">
 										<div className="flex gap-1">
 											<Link
 												href={

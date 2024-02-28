@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Heading } from '@radix-ui/themes';
+import Head from 'next/head';
 
 EditProduct.auth = true;
 EditProduct.role = 'employee';
@@ -20,11 +21,16 @@ export default function EditProduct() {
 			.then((response) => setProduct(response.data));
 	}, id);
 	return (
-		<AdminLayout>
-			<Content>
-				<Heading>Edit product</Heading>
-				{product && <ProductForm {...product}></ProductForm>}
-			</Content>
-		</AdminLayout>
+		<>
+			<Head>
+				<title>Open Fashion | Products</title>
+			</Head>
+			<AdminLayout>
+				<Content>
+					<Heading>Edit product</Heading>
+					{product && <ProductForm {...product}></ProductForm>}
+				</Content>
+			</AdminLayout>
+		</>
 	);
 }

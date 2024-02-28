@@ -12,6 +12,7 @@ export default async function handle(req, res) {
 		const {
 			_id,
 			product_name,
+			collection_,
 			category,
 			price,
 			images,
@@ -22,6 +23,7 @@ export default async function handle(req, res) {
 			{ _id },
 			{
 				product_name,
+				collection_,
 				category,
 				price,
 				images,
