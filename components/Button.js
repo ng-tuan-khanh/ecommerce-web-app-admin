@@ -1,11 +1,9 @@
 import React from 'react';
 
-export default function Button({ content, isFocused, onClick }) {
+export default function Button({ className, content, onClick }) {
 	return (
 		<button
-			className={`p-2 uppercase tracking-[0.25em] ${
-				isFocused ? 'border-b-2 border-[#dd8560]' : 'text-neutral-400'
-			}`}
+			className={`${className} px-6 py-2 uppercase tracking-[0.25em] bg-neutral-600/75 rounded-full text-white`}
 			onClick={onClick}
 		>
 			{content}

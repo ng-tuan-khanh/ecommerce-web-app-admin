@@ -1,10 +1,10 @@
-import Button from '@/components/Button';
+import HeaderNavButton from '@/components/HeaderNavButton';
 import { Box, Flex, IconButton, Text } from '@radix-ui/themes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-export default function Header() {
+export default function Header({ className }) {
 	const router = useRouter();
 	const [group, setGroup] = useState('Women');
 	return (
@@ -19,17 +19,17 @@ export default function Header() {
 				justify="between"
 				gap="5"
 			>
-				<Button
+				<HeaderNavButton
 					content="Women"
 					isFocused={group === 'Women'}
 					onClick={() => setGroup('Women')}
 				/>
-				<Button
+				<HeaderNavButton
 					content="Men"
 					isFocused={group === 'Men'}
 					onClick={() => setGroup('Men')}
 				/>
-				<Button
+				<HeaderNavButton
 					content="Kids"
 					isFocused={group === 'Kids'}
 					onClick={() => setGroup('Kids')}
