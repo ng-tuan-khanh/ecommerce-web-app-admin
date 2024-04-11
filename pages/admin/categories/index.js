@@ -95,7 +95,7 @@ export default function Categories() {
 								value={parent}
 								onChange={(ev) => setParent(ev.target.value)}
 							>
-								<option value="">No parent category</option>
+								<option value="">No group</option>
 								{groups.map((group) => (
 									<option key={group._id} value={group._id}>
 										{group.name}

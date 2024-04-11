@@ -6,11 +6,11 @@ export default async function handle(req, res) {
 	const { method } = req;
 	const { id } = req.query;
 	if (method === 'PUT') {
-		const { name, featured } = req.body;
-		await Collection.updateOne({ _id: id }, { name, featured });
+		const { name, featured, group } = req.body;
+		await Collection.updateOne({ _id: id }, { name, featured, group });
 		res.json(true);
 	} else if (method === 'DELETE') {
-		await Collections.deleteOne({ _id: id });
+		await Collection.deleteOne({ _id: id });
 		res.json(true);
 	}
 }

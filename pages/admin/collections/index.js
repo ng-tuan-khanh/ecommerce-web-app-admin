@@ -10,9 +10,11 @@ Collections.role = 'employee';
 
 export default function Collections() {
 	const [collections, setCollections] = useState([]);
+	const [groups, setGroups] = useState([]);
 
 	const [editedCollection, setEditedCollection] = useState('');
 	const [name, setName] = useState('');
+	const [group, setGroup] = useState('');
 	const [deletedCount, setDeletedCount] = useState(0);
 
 	const [error, setError] = useState(false);
@@ -23,10 +25,16 @@ export default function Collections() {
 		});
 	}, [deletedCount]);
 
+	useEffect(() => {
+		axios.get('/api/groups').then((response) => {
+			setGroups(response.data);
+		});
+	}, []);
+
 	async function saveCollection(ev) {
 		ev.preventDefault();
 
-		if (name === '') {
+		if (name === '' || group === '') {
 			setError(true);
 			return;
 		}
@@ -34,6 +42,7 @@ export default function Collections() {
 		const data = {
 			name,
 			featured: true,
+			group,
 		};
 		if (!editedCollection) {
 			await axios.post('/api/collections', data);
@@ -44,6 +53,7 @@ export default function Collections() {
 		setError(false);
 		setEditedCollection('');
 		setName('');
+		setGroup('');
 		setDeletedCount((cnt) => cnt + 1);
 	}
 	async function deleteCollection(_id) {
@@ -54,6 +64,7 @@ export default function Collections() {
 		setError(false);
 		setEditedCollection(collection);
 		setName(collection.name);
+		setGroup(collection.group?._id || '');
 	}
 	return (
 		<>
@@ -81,6 +92,18 @@ export default function Collections() {
 								value={name}
 								onChange={(ev) => setName(ev.target.value)}
 							></input>
+							<select
+								className="flex-grow"
+								value={group}
+								onChange={(ev) => setGroup(ev.target.value)}
+							>
+								<option value="">No group</option>
+								{groups.map((group) => (
+									<option key={group._id} value={group._id}>
+										{group.name}
+									</option>
+								))}
+							</select>
 							<Button size="3" variant="surface" type="submit">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -131,13 +154,19 @@ export default function Collections() {
 						<Table.Header>
 							<Table.Row>
 								<Table.ColumnHeaderCell
-									width="50%"
+									width="33%"
 									justify="center"
 								>
 									Collection name
 								</Table.ColumnHeaderCell>
 								<Table.ColumnHeaderCell
-									width="50%"
+									width="33%"
+									justify="center"
+								>
+									Group
+								</Table.ColumnHeaderCell>
+								<Table.ColumnHeaderCell
+									width="33%"
 									justify="center"
 								>
 									Options
@@ -150,6 +179,9 @@ export default function Collections() {
 									<Table.RowHeaderCell justify="center">
 										{collection.name}
 									</Table.RowHeaderCell>
+									<Table.Cell justify="center">
+										{collection.group?.name}
+									</Table.Cell>
 									<Table.Cell justify="center">
 										<div className="flex gap-2 justify-center">
 											<Button
